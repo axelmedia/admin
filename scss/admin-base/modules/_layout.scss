@@ -1,0 +1,147 @@
+// main: ../admin.scss
+
+html, body {
+    height:100%;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    flex: 0 0 auto;
+
+    > header {
+        height:$navbar-height;
+        padding-left:$navbar-height;
+        position:relative;
+        z-index:3;
+
+        @media (min-width: $screen-sm-min) {
+            padding-left:initial;
+        }
+    }
+
+    > footer {
+        flex:0;
+        position:relative;
+        z-index:1;
+    }
+
+    > main {
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: row;
+        position:relative;
+        // overflow:hidden;
+
+
+        > article {
+            flex: 0 0 100%;
+            display: flex;
+            flex-direction: column;
+            position:relative;
+            z-index:1;
+
+            > section {
+                flex: 1;
+                position:relative;
+                z-index:2;
+            }
+
+            > aside {
+                order: -1;
+                position:relative;
+                z-index:1;
+            }
+        }
+
+        > section {
+            width:0;
+            position:relative;
+            align-self:stretch;
+            flex: 0 0 auto;
+            order: -1;
+            transition:width $sidebar-toggle-speed ease-in-out;
+            align-self:stretch;
+
+            > nav {
+                width:100%;
+                height:100%;
+                position:absolute;
+                top:0;
+                left:0;
+                overflow-y:auto;
+            }
+        }
+
+        @media (min-width: $screen-sm-min) {
+            z-index:2;
+
+            > article {
+                flex: 1;
+
+                > section {
+                    min-width:$screen-xs-min;
+                }
+            }
+
+            > section {
+                z-index:2;
+                width:$sidebar-sm-width;
+            }
+        }
+
+        @media (min-width: $screen-md-min) {
+            > article {
+                flex: 1 0 0;
+                flex-direction: row;
+
+                > aside {
+                    width:$subbar-md-width;
+                    flex: 0 0 auto;
+                    order: 0;
+                }
+            }
+
+            > section {
+                width:$sidebar-md-width;
+            }
+        }
+    }
+
+    // Hide Togglers
+    > input[type="checkbox"] {
+        position:absolute;
+        bottom:100%;
+        right:100%;
+        z-index:2;
+        visibility:hidden;
+    }
+
+    // Sidebar Toggle
+    > main > section > label[for="#{$ns}-sidebar-toggle"] {
+        width:$navbar-height;
+        height:$navbar-height;
+        margin:0;
+        max-width:inherit;
+        min-width:inherit;
+        position:absolute;
+        bottom:100%;
+        left:0;
+        z-index:99;
+        font-weight:inherit;
+        line-height:$navbar-height;
+        text-align:center;
+        cursor:pointer;
+
+        @media (min-width: $screen-sm-min) {
+            display:none;
+        }
+    }
+
+    @media (max-width: $screen-sm-max) {
+        ##{$ns}-sidebar-toggle:checked ~ main > section {
+            width:$sidebar-xs-width;
+        }
+    }
+}

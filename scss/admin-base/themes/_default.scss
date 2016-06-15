@@ -1,0 +1,44 @@
+// main: ../admin.scss
+
+$header-height:40px;
+$sidebar-xs-width:70vw;
+$sidebar-sm-width:25%;
+$sidebar-md-width:300px;
+$subbar-md-width:200px;
+$sidebar-toggle-speed:.3s;
+
+
+@include style-header {
+    background:#333;
+    box-shadow:0 1px 5px rgba(0,0,0,.3);
+}
+
+@include style-footer {
+    background:#444;
+}
+
+@include style-main {
+
+}
+
+@include style-sidebar {
+    background:#666;
+    box-shadow:inset -1px 0 4px rgba(0,0,0,.5);
+}
+
+@include style-sidebar-toggle {
+    font-size:20px;
+    color:#fff;
+    border-right:1px solid #555;
+}
+
+@include style-sidebar-toggle-checked {
+    .fa-bars:before {
+        content:'\f00d';
+    }
+}
+
+@include style-subbar {
+    background:#ddd;
+    box-shadow:inset 1px 0 3px rgba(0,0,0,.3);
+}
