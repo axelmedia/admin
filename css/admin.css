@@ -1,15 +1,47 @@
+body > div > header {
+  background: #333;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+body > div > footer {
+  background: #444;
+}
+
+body > div > main > section > nav {
+  background: #666;
+  box-shadow: inset -1px 0 4px rgba(0, 0, 0, 0.5);
+}
+
+body > div > main > section > label[for="admin-sidebar-toggle"] {
+  font-size: 20px;
+  color: #fff;
+  border-right: 1px solid #555;
+}
+
+#admin-sidebar-toggle:checked ~ main > section > label[for="admin-sidebar-toggle"] .fa-bars:before {
+  content: '\f00d';
+}
+
+body > div > main > article > aside {
+  background: #ddd;
+  box-shadow: inset 1px 0 3px rgba(0, 0, 0, 0.3);
+}
+
 html, body {
   height: 100%;
 }
 
-body {
+body > div {
+  width: 100%;
+  overflow-x: hidden;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   flex: 0 0 auto;
 }
 
-body > header {
+body > div > header {
+  width: 100%;
   height: 50px;
   padding-left: 50px;
   position: relative;
@@ -17,25 +49,25 @@ body > header {
 }
 
 @media (min-width: 768px) {
-  body > header {
+  body > div > header {
     padding-left: initial;
   }
 }
 
-body > footer {
+body > div > footer {
   flex: 0;
   position: relative;
   z-index: 1;
 }
 
-body > main {
+body > div > main {
   display: flex;
   flex: 1 0 auto;
   flex-direction: row;
   position: relative;
 }
 
-body > main > article {
+body > div > main > article {
   flex: 0 0 100%;
   display: flex;
   flex-direction: column;
@@ -43,19 +75,19 @@ body > main > article {
   z-index: 1;
 }
 
-body > main > article > section {
+body > div > main > article > section {
   flex: 1;
   position: relative;
   z-index: 2;
 }
 
-body > main > article > aside {
+body > div > main > article > aside {
   order: -1;
   position: relative;
   z-index: 1;
 }
 
-body > main > section {
+body > div > main > section {
   width: 0;
   position: relative;
   align-self: stretch;
@@ -65,7 +97,7 @@ body > main > section {
   align-self: stretch;
 }
 
-body > main > section > nav {
+body > div > main > section > nav {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -75,45 +107,37 @@ body > main > section > nav {
 }
 
 @media (min-width: 768px) {
-  body > main {
+  body > div > main {
     z-index: 2;
   }
-  body > main > article {
+  body > div > main > article {
     flex: 1;
   }
-  body > main > article > section {
+  body > div > main > article > section {
     min-width: 480px;
   }
-  body > main > section {
+  body > div > main > section {
     z-index: 2;
     width: 25%;
   }
 }
 
 @media (min-width: 992px) {
-  body > main > article {
+  body > div > main > article {
     flex: 1 0 0;
     flex-direction: row;
   }
-  body > main > article > aside {
+  body > div > main > article > aside {
     width: 200px;
     flex: 0 0 auto;
     order: 0;
   }
-  body > main > section {
+  body > div > main > section {
     width: 300px;
   }
 }
 
-body > input[type="checkbox"] {
-  position: absolute;
-  bottom: 100%;
-  right: 100%;
-  z-index: 2;
-  visibility: hidden;
-}
-
-body > main > section > label[for="admin-sidebar-toggle"] {
+body > div > main > section > label[for="admin-sidebar-toggle"] {
   width: 50px;
   height: 50px;
   margin: 0;
@@ -130,44 +154,23 @@ body > main > section > label[for="admin-sidebar-toggle"] {
 }
 
 @media (min-width: 768px) {
-  body > main > section > label[for="admin-sidebar-toggle"] {
+  body > div > main > section > label[for="admin-sidebar-toggle"] {
     display: none;
   }
 }
 
+body > input[type="checkbox"] {
+  position: absolute;
+  bottom: 100%;
+  right: 100%;
+  z-index: 2;
+  visibility: hidden;
+}
+
 @media (max-width: 991px) {
-  body #admin-sidebar-toggle:checked ~ main > section {
-    width: 70vw;
+  body #admin-sidebar-toggle:checked ~ div > main > section {
+    width: 220px;
   }
-}
-
-body > header {
-  background: #333;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-}
-
-body > footer {
-  background: #444;
-}
-
-body > main > section > nav {
-  background: #666;
-  box-shadow: inset -1px 0 4px rgba(0, 0, 0, 0.5);
-}
-
-body > main > section > label[for="admin-sidebar-toggle"] {
-  font-size: 20px;
-  color: #fff;
-  border-right: 1px solid #555;
-}
-
-#admin-sidebar-toggle:checked ~ main > section > label[for="admin-sidebar-toggle"] .fa-bars:before {
-  content: '\f00d';
-}
-
-body > main > article > aside {
-  background: #ddd;
-  box-shadow: inset 1px 0 3px rgba(0, 0, 0, 0.3);
 }
 
 /*# sourceMappingURL=admin.css.map */

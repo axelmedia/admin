@@ -14,6 +14,8 @@
     <button disabled={ !text }>Add #{ items.length + 1 }</button>
   </form>
 
+  <div style="width:100px;height:2000px;background:gray;margin:0 20px;">long content</div>
+
   <script>
     this.disabled = true
 

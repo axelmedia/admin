@@ -52,31 +52,31 @@
 
 // Element selectors
 @mixin style-header {
-    body > header {
+    body > div > header {
         @content;
     }
 }
 
 @mixin style-footer {
-    body > footer {
+    body > div > footer {
         @content;
     }
 }
 
 @mixin style-main {
-    body > main > article > section {
+    body > div > main > article > section {
         @content;
     }
 }
 
 @mixin style-sidebar {
-    body > main > section > nav {
+    body > div > main > section > nav {
         @content;
     }
 }
 
 @mixin style-sidebar-toggle {
-    body > main > section > label[for="#{$ns}-sidebar-toggle"] {
+    body > div > main > section > label[for="#{$ns}-sidebar-toggle"] {
         @content;
     }
 }
@@ -88,7 +88,7 @@
 }
 
 @mixin style-subbar {
-    body > main > article > aside {
+    body > div > main > article > aside {
         @content;
     }
 }
