@@ -2,93 +2,90 @@
 
 // Media query
 
-@mixin style-only-xs {
-    @media screen and (max-width: $screen-xs-max) {
+
+@mixin style-only-mobile {
+    @media screen and (max-width: $screen-mobile-max) {
         @content;
     }
 }
 
-@mixin style-only-sm {
-    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+@mixin style-only-tablet {
+    @media (min-width: $screen-tablet-min) and (max-width: $screen-tablet-max) {
         @content;
     }
 }
 
-@mixin style-only-md {
-    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+@mixin style-only-desktop {
+    @media (min-width: $screen-desktop-min) and (max-width: $screen-desktop-max) {
         @content;
     }
 }
 
-@mixin style-only-lg {
-    @media (min-width: $screen-lg-min) {
+@mixin style-only-huge {
+    @media (min-width: $screen-huge-min) {
         @content;
     }
 }
 
-@mixin style-xs {
-    @media screen and (max-width: $screen-xs-max) {
+@mixin style-mobile {
+    @media screen and (max-width: $screen-mobile-max) {
         @content;
     }
 }
 
-@mixin style-sm {
-    @media (min-width: $screen-sm-min) {
+@mixin style-tablet {
+    @media (min-width: $screen-tablet-min) {
         @content;
     }
 }
 
-@mixin style-only-md {
-    @media (min-width: $screen-md-min) {
+@mixin style-desktop {
+    @media (min-width: $screen-desktop-min) {
         @content;
     }
 }
 
-@mixin style-only-lg {
-    @media (min-width: $screen-lg-min) {
+@mixin style-huge {
+    @media (min-width: $screen-huge-min) {
         @content;
     }
 }
 
 // Element selectors
 @mixin style-header {
-    body > div > header {
+    body > header {
         @content;
     }
 }
 
 @mixin style-footer {
-    body > div > footer {
+    body > main > article > footer {
         @content;
     }
 }
 
 @mixin style-main {
-    body > div > main > article > section {
+    body > main > article > section {
         @content;
     }
 }
 
 @mixin style-sidebar {
-    body > div > main > section > nav {
+    body > main > aside {
         @content;
     }
 }
 
-@mixin style-sidebar-toggle {
-    body > div > main > section > label[for="#{$ns}-sidebar-toggle"] {
-        @content;
-    }
-}
 
-@mixin style-sidebar-toggle-checked {
-    ##{$ns}-sidebar-toggle:checked ~ main > section > label[for="#{$ns}-sidebar-toggle"] {
-        @content;
-    }
-}
 
-@mixin style-subbar {
-    body > div > main > article > aside {
-        @content;
-    }
+@mixin flex($display:flex, $direction: row, $align: flex-start) {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-#{$display};
+    display: -ms-flexbox;
+    display: $display;
+    -webkit-flex-direction: $direction;
+    flex-direction: $direction;
+    -webkit-align-items: $align;
+    align-items: $align;
 }

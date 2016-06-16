@@ -1,5 +1,5 @@
-<ex-footer>
+<r-footer>
     <div class="container-fluid">
         &copy; axelmedia
     </div>
-</ex-footer>
+</r-footer>

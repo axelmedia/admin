@@ -1,20 +1,14 @@
 // main: ../admin.scss
 
-$header-height:40px;
-$sidebar-xs-width:220px;
-$sidebar-sm-width:25%;
-$sidebar-md-width:300px;
-$subbar-md-width:200px;
-$sidebar-toggle-speed:.3s;
-
-
 @include style-header {
-    background:#333;
-    box-shadow:0 1px 5px rgba(0,0,0,.3);
+    background:#fff;
+    border-bottom:1px solid #ddd;
+    // -webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),0 4px 5px 0 rgba(0,0,0,0.06),0 1px 10px 0 rgba(0,0,0,0.08);
+    // box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),0 4px 5px 0 rgba(0,0,0,0.06),0 1px 10px 0 rgba(0,0,0,0.08);
 }
 
 @include style-footer {
-    background:#444;
+
 }
 
 @include style-main {
@@ -22,23 +16,7 @@ $sidebar-toggle-speed:.3s;
 }
 
 @include style-sidebar {
-    background:#666;
-    box-shadow:inset -1px 0 4px rgba(0,0,0,.5);
-}
-
-@include style-sidebar-toggle {
-    font-size:20px;
-    color:#fff;
-    border-right:1px solid #555;
-}
-
-@include style-sidebar-toggle-checked {
-    .fa-bars:before {
-        content:'\f00d';
-    }
-}
-
-@include style-subbar {
-    background:#ddd;
-    box-shadow:inset 1px 0 3px rgba(0,0,0,.3);
+    background:#f9f9f9;
+    border-right:1px solid #ddd;
+    // box-shadow:inset -1px 0 3px rgba(0,0,0,.7);
 }

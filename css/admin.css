@@ -1,175 +1,509 @@
-body > div > header {
-  background: #333;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+/*
+	HTML5 Reset :: style.css
+	----------------------------------------------------------
+	We have learned much from/been inspired by/taken code where offered from:
+
+	Eric Meyer					:: http://meyerweb.com
+	HTML5 Doctor				:: http://html5doctor.com
+	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+
+-------------------------------------------------------------------------------*/
+/* Let's default this puppy out
+-------------------------------------------------------------------------------*/
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent;
 }
 
-body > div > footer {
-  background: #444;
+article, aside, figure, footer, header, nav, section, details, summary {
+  display: block;
 }
 
-body > div > main > section > nav {
-  background: #666;
-  box-shadow: inset -1px 0 4px rgba(0, 0, 0, 0.5);
+/* Handle box-sizing while better addressing child elements:
+   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+  box-sizing: border-box;
 }
 
-body > div > main > section > label[for="admin-sidebar-toggle"] {
-  font-size: 20px;
-  color: #fff;
-  border-right: 1px solid #555;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
-#admin-sidebar-toggle:checked ~ main > section > label[for="admin-sidebar-toggle"] .fa-bars:before {
-  content: '\f00d';
+/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
+/* Responsive images and other embedded objects */
+/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */
+img,
+object,
+embed {
+  max-width: 100%;
 }
 
-body > div > main > article > aside {
-  background: #ddd;
-  box-shadow: inset 1px 0 3px rgba(0, 0, 0, 0.3);
+/*
+   Note: keeping IMG here will cause problems if you're using foreground images as sprites.
+	In fact, it *will* cause problems with Google Maps' controls at small size.
+	If this is the case for you, try uncommenting the following:
+
+#map img {
+		max-width: none;
+}
+*/
+/* force a vertical scrollbar to prevent a jumpy page */
+html {
+  overflow-y: scroll;
+}
+
+/* we use a lot of ULs that aren't bulleted.
+	you'll have to restore the bullets within content,
+	which is fine because they're probably customized anyway */
+ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted #000;
+  cursor: help;
+}
+
+/* tables still need cellspacing="0" in the markup */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th {
+  font-weight: bold;
+  vertical-align: bottom;
+}
+
+td {
+  font-weight: normal;
+  vertical-align: top;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+pre {
+  white-space: pre;
+  /* CSS2 */
+  white-space: pre-wrap;
+  /* CSS 2.1 */
+  white-space: pre-line;
+  /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word;
+  /* IE */
+}
+
+input[type="radio"] {
+  vertical-align: text-bottom;
+}
+
+input[type="checkbox"] {
+  vertical-align: bottom;
+}
+
+.ie7 input[type="checkbox"] {
+  vertical-align: baseline;
+}
+
+.ie6 input {
+  vertical-align: text-bottom;
+}
+
+select, input, textarea {
+  font: 99% sans-serif;
+}
+
+table {
+  font-size: inherit;
+  font: 100%;
+}
+
+small {
+  font-size: 85%;
+}
+
+strong {
+  font-weight: bold;
+}
+
+td, td img {
+  vertical-align: top;
+}
+
+/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {
+  font-family: monospace, sans-serif;
+}
+
+/* hand cursor on clickable elements */
+.clickable,
+label,
+input[type=button],
+input[type=submit],
+input[type=file],
+button {
+  cursor: pointer;
+}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {
+  margin: 0;
+}
+
+/* make buttons play nice in IE */
+button,
+input[type=button] {
+  width: auto;
+  overflow: visible;
+}
+
+/* scale images in IE7 more attractively */
+.ie7 img {
+  -ms-interpolation-mode: bicubic;
+}
+
+/* prevent BG image flicker upon hover
+   (commented out as usage is rare, and the filter syntax messes with some pre-processors)
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+*/
+/* let's clear some floats */
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+body > header {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+body > main > aside {
+  background: #f9f9f9;
+  border-right: 1px solid #ddd;
 }
 
 html, body {
   height: 100%;
 }
 
-body > div {
+body {
+  padding-top: 50px;
+}
+
+body header {
   width: 100%;
-  overflow-x: hidden;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  flex: 0 0 auto;
-}
-
-body > div > header {
-  width: 100%;
-  height: 50px;
-  padding-left: 50px;
-  position: relative;
-  z-index: 3;
-}
-
-@media (min-width: 768px) {
-  body > div > header {
-    padding-left: initial;
-  }
-}
-
-body > div > footer {
-  flex: 0;
-  position: relative;
-  z-index: 1;
-}
-
-body > div > main {
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: row;
-  position: relative;
-}
-
-body > div > main > article {
-  flex: 0 0 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 1;
-}
-
-body > div > main > article > section {
-  flex: 1;
-  position: relative;
-  z-index: 2;
-}
-
-body > div > main > article > aside {
-  order: -1;
-  position: relative;
-  z-index: 1;
-}
-
-body > div > main > section {
-  width: 0;
-  position: relative;
-  align-self: stretch;
-  flex: 0 0 auto;
-  order: -1;
-  transition: width 0.3s ease-in-out;
-  align-self: stretch;
-}
-
-body > div > main > section > nav {
-  width: 100%;
-  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  overflow-y: auto;
-}
-
-@media (min-width: 768px) {
-  body > div > main {
-    z-index: 2;
-  }
-  body > div > main > article {
-    flex: 1;
-  }
-  body > div > main > article > section {
-    min-width: 480px;
-  }
-  body > div > main > section {
-    z-index: 2;
-    width: 25%;
-  }
-}
-
-@media (min-width: 992px) {
-  body > div > main > article {
-    flex: 1 0 0;
-    flex-direction: row;
-  }
-  body > div > main > article > aside {
-    width: 200px;
-    flex: 0 0 auto;
-    order: 0;
-  }
-  body > div > main > section {
-    width: 300px;
-  }
-}
-
-body > div > main > section > label[for="admin-sidebar-toggle"] {
-  width: 50px;
+  z-index: 3;
   height: 50px;
-  margin: 0;
-  max-width: inherit;
-  min-width: inherit;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  z-index: 99;
-  font-weight: inherit;
-  line-height: 50px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+
+body header > label:first-child {
+  display: block;
+  order: -1;
+  width: 50px;
+  padding: 13px 0;
   text-align: center;
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  body > div > main > section > label[for="admin-sidebar-toggle"] {
-    display: none;
-  }
+body header > nav {
+  height: 50px;
+  flex: 1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
 }
 
-body > input[type="checkbox"] {
+body header > nav > .-logo {
+  display: inline-block;
+  margin-right: auto;
+  padding: 0 10px;
+  order: -1;
+  line-height: 47px;
+}
+
+body header > nav > ul {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+
+body header > nav > ul .fa, body header > nav > ul .icon {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 20px;
+}
+
+body header > nav > ul > li {
+  display: inline-block;
+}
+
+body header > nav > ul > li > a {
+  display: inline-block;
+  line-height: 47px;
+  padding: 0 10px;
+}
+
+body > main > aside {
+  width: calc(100% - 56px);
+  max-width: 320px;
+  min-width: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  overflow-x: hidden;
+  will-change: transform;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-transition: transform 240ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 240ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+body > input[type="checkbox"]:first-child {
   position: absolute;
   bottom: 100%;
   right: 100%;
-  z-index: 2;
   visibility: hidden;
 }
 
-@media (max-width: 991px) {
-  body #admin-sidebar-toggle:checked ~ div > main > section {
-    width: 220px;
+body > input[type="checkbox"]:first-child + label {
+  display: block;
+  width: 0;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  opacity: 0;
+  background: #000;
+  animation: sidebar-backdrop-hide 0.5s ease;
+  pointer-events: none;
+}
+
+body > input[type="checkbox"]:first-child + label:after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  animation: sidebar-backdrop-init 0.5s ease;
+  animation-fill-mode: forwards;
+}
+
+body > input[type="checkbox"]:first-child:checked + label {
+  animation: sidebar-backdrop-show 0.5s ease;
+  animation-fill-mode: forwards;
+  pointer-events: auto;
+}
+
+body > input[type="checkbox"]:first-child:checked + label:after {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+body > input[type="checkbox"]:first-child:checked ~ main > aside:first-of-type {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes sidebar-backdrop-hide {
+  0% {
+    width: 100%;
+    opacity: .5;
+  }
+  99% {
+    width: 100%;
+    opacity: .0;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes sidebar-backdrop-show {
+  0% {
+    width: 100%;
+    opacity: 0;
+  }
+  100% {
+    width: 100%;
+    opacity: .5;
+  }
+}
+
+@keyframes sidebar-backdrop-init {
+  0% {
+    width: 100%;
+    height: 100%;
+  }
+  99% {
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    padding-top: 60px;
+  }
+  body > header {
+    height: 60px;
+  }
+  body > header > label:first-child {
+    width: 60px;
+    padding: 18px 0;
+  }
+  body > header > nav {
+    height: 60px;
+  }
+  body > header > nav > .-logo {
+    padding: 0 12px;
+    line-height: 57px;
+  }
+  body > header > nav > ul .fa, body > header > nav > ul .icon {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 20px;
+  }
+  body > header > nav > ul > li > a {
+    line-height: 57px;
+    padding: 0 12px;
+  }
+}
+
+@media (min-width: 960px) {
+  body > header > label:first-child {
+    display: none;
+  }
+  body > main {
+    min-height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+  }
+  body > main > article {
+    flex: 1;
+  }
+  body > main > aside {
+    width: 250px;
+    max-width: 100%;
+    min-width: 0;
+    position: relative;
+    z-index: 2;
+    -webkit-transform: none;
+    transform: none;
+    -webkit-transition: none 0 ease;
+    transition: none 0 ease;
+    order: -1;
+  }
+  body > main > aside > nav {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 

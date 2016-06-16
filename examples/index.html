@@ -16,41 +16,36 @@
     <link href="../css/admin.min.css" rel="stylesheet">
 </head>
 <body>
-<input type="checkbox" id="admin-sidebar-toggle">
-<div>
+    <input type="checkbox" id="admin-sidebar-toggle">
+    <label for="admin-sidebar-toggle"></label>
+
     <header>
-        <ex-header></admin-header>
+        <label for="admin-sidebar-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </label>
+        <nav riot-tag="r-header"></nav>
     </header>
+
     <main>
         <article>
-            <section>
-                <ex-index></admin-index>
-            </section>
-            <aside>
-                <ex-subbar></ex-subbar>
-            </aside>
+            <section riot-tag="r-index"></section>
+            <footer riot-tag="r-footer"></footer>
         </article>
-        <section>
-            <nav>
-                <ex-sidebar></ex-sidebar>
-            </nav>
-            <label for="admin-sidebar-toggle"><i class="fa fa-bars"></i></label>
-        </section>
 
+        <aside>
+            <nav riot-tag="r-sidebar"></nav>
+        </aside>
     </main>
-    <footer>
-        <ex-footer></ex-footer>
-    </footer>
-</div>
-
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.4.1/riot+compiler.min.js"></script>
-<script src="ex-header.tag" type="riot/tag"></script>
-<script src="ex-footer.tag" type="riot/tag"></script>
-<script src="ex-sidebar.tag" type="riot/tag"></script>
-<script src="ex-subbar.tag" type="riot/tag"></script>
-<script src="ex-index.tag" type="riot/tag"></script>
-<script>riot.mount('*');</script>
+<script src="r-header.tag" type="riot/tag"></script>
+<script src="r-footer.tag" type="riot/tag"></script>
+<script src="r-sidebar.tag" type="riot/tag"></script>
+<script src="r-index.tag" type="riot/tag"></script>
+<script>
+riot.mount('*');
+</script>
 </body>
 </html>

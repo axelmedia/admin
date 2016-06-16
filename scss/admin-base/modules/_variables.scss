@@ -2,9 +2,20 @@
 
 $ns: 'admin';
 
-$sidebar-xs-width:70vw !default;
-$sidebar-sm-width:25% !default;
-$sidebar-md-width:300px !default;
-$sidebar-toggle-speed:.3s !default;
+$grid:12px;
+$grid-mobile:$grid - 2;
 
-$subbar-md-width:200px !default;
+
+$screen-mobile-min:480px !default;
+$screen-tablet-min:600px !default;
+$screen-desktop-min:960px !default;
+$screen-huge-min:1280px !default;
+$screen-mobile-max:($screen-tablet-min - 1) !default;
+$screen-tablet-max:($screen-desktop-min - 1) !default;
+$screen-huge-max:($screen-desktop-min - 1) !default;
+
+$header-height-desktop:($grid * 5);
+$header-height-mobile:($grid-mobile * 5);
+
+$sidebar-width-desktop:250px !default;
+$sidebar-width-mobile:320px !default;
