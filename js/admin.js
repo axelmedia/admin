@@ -15,13 +15,29 @@ var sidebarActiver = (function() {
         this.root = document;
         this.selector = 'a';
         this.base = '/';
+        this.active = 'active';
+        this.parent = [];
         this.count = 0;
         this.items = {};
-        this.clickChanger = false;
+        this.clickOnActive = false;
+        this.onClick = null;
 
         if ('object' == typeof conf) {
             if (conf.selector) {
                 this.selector = conf.selector;
+            }
+            if ('string' == typeof conf.active) {
+                this.active = conf.active.replace(/^[\#\.]/, '');
+            }
+            if ('function' == typeof conf.onClick) {
+                this.onClick = conf.onClick;
+            }
+            if (conf.parent) {
+                if ('string' == typeof conf.parent) {
+                    this.parent.push(conf.parent);
+                } else if (Object.prototype.toString.call(conf.parent) === '[object Array]') {
+                    this.parent = conf.parent;
+                }
             }
             if (conf.root) {
                 if ('string' == typeof conf.root) {
@@ -46,6 +62,7 @@ var sidebarActiver = (function() {
 
     main.prototype = {
         render: function() {
+            var self = this;
             var elements = this.root.querySelectorAll(this.selector);
             if (!elements.length) {
                 return;
@@ -67,15 +84,16 @@ var sidebarActiver = (function() {
 
                 id = this.id + '-' + (i + 1);
                 var path = this.getPath(element.pathname);
-                element[_propName] = id;
-                added.push(id);
-                this.items[id] = {
+                var item = {
                     id: id,
                     path: path,
                     parents: [],
                     src: element
                 };
-                if (this.clickChanger) {
+                element[_propName] = id;
+                added.push(id);
+                this.items[id] = item;
+                if (this.onClick) {
                     element.addEventListener('click', this.click.bind(this));
                 }
                 ++this.count;
@@ -86,22 +104,22 @@ var sidebarActiver = (function() {
             }
 
             // Get parents
-            var titles = this.root.querySelectorAll(':scope .title');
-            for (i = 0, l = titles.length; i < l; i++) {
-                var title = titles[i];
-                var content = titles[i].nextElementSibling;
-                if (content && content.getAttribute('class').match(/ ?content ?/)) {
-                    var links = content.querySelectorAll(this.selector);
-                    if (links.length) {
-                        for (var j = 0, jl = links.length; j < jl; j++) {
-                            var link = links[j];
-                            if (!link[_propName]) {
-                                continue;
-                            }
-                            id = link[_propName];
-                            if (added.indexOf(id)) {
-                                this.items[id].parents.push(title);
-                                this.items[id].parents.push(content);
+            if (this.parent.length) {
+                for(var key in this.parent) {
+                    var parents = this.root.querySelectorAll(':scope ' + this.parent[key]);
+                    for (i = 0, l = parents.length; i < l; i++) {
+                        var parent = parents[i];
+                        var links = parent.querySelectorAll(this.selector);
+                        if (links.length) {
+                            for (var j = 0, jl = links.length; j < jl; j++) {
+                                var link = links[j];
+                                if (!link[_propName]) {
+                                    continue;
+                                }
+                                id = link[_propName];
+                                if (added.indexOf(id)) {
+                                    this.items[id].parents.push(parent);
+                                }
                             }
                         }
                     }
@@ -117,8 +135,12 @@ var sidebarActiver = (function() {
         },
 
         click: function(e) {
-            if (e.target.pathname && e.target[_propName] && this.items[e.target[_propName]]) {
-                this.setActive(e.target.pathname);
+            if (this.onClick && e.target.pathname && e.target[_propName] && this.items[e.target[_propName]]) {
+                var item = this.items[e.target[_propName]];
+                this.onClick(e, {
+                    normalized_url: item.path,
+                    parents: item.parents
+                });
             }
         },
 
@@ -160,11 +182,11 @@ var sidebarActiver = (function() {
                         }
                     }
                 } else {
-                    this.removeClass(item.src, 'active');
+                    this.removeClass(item.src, this.active);
                     l = item.parents.length;
                     if (l) {
                         for (i = 0; i < l; i++) {
-                            this.removeClass(item.parents[i], 'active');
+                            this.removeClass(item.parents[i], this.active);
                         }
                     }
                 }
@@ -175,7 +197,7 @@ var sidebarActiver = (function() {
             }
 
             for (i = 0, l = actives.length; i < l; i++) {
-                this.addClass(actives[i], 'active');
+                this.addClass(actives[i], this.active);
             }
         }
     };
@@ -187,7 +209,11 @@ var sidebarActiver = (function() {
 var sidebar = new sidebarActiver({
     root: '#sidebar',
     base: '/examples/',
-    selector: 'a'
+    selector: 'a',
+    parent: ['.title', '.content'],
+    onClick: function(e, item) {
+        console.log([e, item]);
+    }
 });
 sidebar.setActive();
 
