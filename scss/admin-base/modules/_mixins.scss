@@ -1,8 +1,6 @@
 // main: ../admin.scss
 
 // Media query
-
-
 @mixin style-only-mobile {
     @media screen and (max-width: $screen-mobile-max) {
         @content;
@@ -53,7 +51,7 @@
 
 // Element selectors
 @mixin style-header {
-    body > header {
+    body > .ui.fixed.menu {
         @content;
     }
 }
@@ -65,14 +63,22 @@
 }
 
 @mixin style-main {
-    body > main > article > section {
+    body > .ui.left.sidebar~.pusher {
         @content;
     }
 }
 
 @mixin style-sidebar {
-    body > main > aside {
+    body > .ui.left.sidebar {
         @content;
+    }
+}
+
+@mixin style-content {
+    @include style-main {
+        > article {
+            @content;
+        }
     }
 }
 

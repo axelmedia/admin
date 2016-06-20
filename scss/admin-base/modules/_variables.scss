@@ -1,10 +1,6 @@
 // main: ../admin.scss
 
-$ns: 'admin';
-
-$grid:12px;
-$grid-mobile:$grid - 2;
-
+$font-family:Arial, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, メイリオ, Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 
 $screen-mobile-min:480px !default;
 $screen-tablet-min:600px !default;
@@ -14,8 +10,6 @@ $screen-mobile-max:($screen-tablet-min - 1) !default;
 $screen-tablet-max:($screen-desktop-min - 1) !default;
 $screen-huge-max:($screen-desktop-min - 1) !default;
 
-$header-height-desktop:($grid * 5);
-$header-height-mobile:($grid-mobile * 5);
-
-$sidebar-width-desktop:250px !default;
-$sidebar-width-mobile:320px !default;
+$header-height:42px;
+$sidebar-width:260px;
+$content-padding:1rem;

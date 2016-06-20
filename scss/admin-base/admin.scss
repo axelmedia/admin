@@ -1,243 +1,83 @@
 // compileCompressed: ../../css/$1.min.css, compileExpanded: ../../css/$1.css, sourceMap: true
 
-// @import "../bootstrap/variables";
-// @import "../bootstrap/mixins";
 @import 'modules/variables';
 @import 'modules/mixins';
 
-@import "modules/reset";
-@import 'themes/default';
+// @import "modules/reset";
 // @import 'modules/layout';
+// @import 'modules/sidebar';
+// @import 'themes/default';
 
-html, body {
-    height:100%;
+body, .ui.menu, h1, h2, h3, h4, h5, .ui.form input, .ui.form textarea, .ui.form select,  .ui.button {
+    font-family: $font-family;
 }
 
-body {
-    padding-top:$header-height-mobile;
+.ui.accordion.menu .item .title {
+    >.dropdown.icon {
+        margin-top:0;
+    }
 
-    header {
-        width:100%;
-        position:absolute;
-        top:0;
-        left:0;
-        z-index:3;
-        height:$header-height-mobile;
-        @include flex;
+    // @see: https://github.com/Semantic-Org/Semantic-UI/blob/42e41c2699691ff59c148a41a326a9b874a0f08e/dist/components/menu.css#L93
+    + .content {
+        // margin-left:-1.14285714em;
+        margin-right:-1.14285714em;
+        margin-bottom:-0.92857143em;
+    }
+}
 
-        > label:first-child {
-            display:block;
-            order: -1;
-            width:$header-height-mobile;
-            padding:floor(($header-height-mobile - ($grid * 2)) / 2) 0;
-            text-align:center;
-            cursor:pointer;
-        }
+.ui.inverted.accordion .title.active {
+    color:rgba(255,255,255,.6);
+}
 
-        > nav {
-            height:$header-height-mobile;
-            flex:1;
-            @include flex;
+@include style-header {
+    height:$header-height;
+}
 
-            > .-logo {
-                display:inline-block;
-                margin-right: auto;
-                padding:0 $grid-mobile;
-                order: -1;
-                line-height:$header-height-mobile - 3;
-            }
+@include style-main {
+    padding-top: $header-height;
+}
 
-            > ul {
-                @include flex;
+@include style-content {
+    padding:$content-padding;
 
-                .fa, .icon {
-                    width:($grid-mobile * 2);
-                    height:($grid-mobile * 2);
-                    text-align:center;
-                    line-height:($grid-mobile * 2);
-                    font-size:floor(($grid * 2) - ($grid-mobile / 3));
-                }
+    .full-width {
+        padding:$content-padding;
+        margin-left:-$content-padding !important;
+        margin-right:-$content-padding !important;
+    }
+}
 
-                > li {
-                    display:inline-block;
+@include style-tablet {
 
-                    > a {
-                        display:inline-block;
-                        line-height:$header-height-mobile - 3;
-                        padding:0 $grid-mobile;
-                    }
-                }
-            }
+    @include style-header {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        z-index:102;
+
+        .sidebar-toggle {
+            display:none;
         }
     }
 
-    // sidebar
-    > main > aside {
-        $calc:($grid-mobile * 6 - 4);
-        width: calc(100% - #{$calc});
-        max-width: $sidebar-width-mobile;
-        min-width:200px;
-        position:fixed;
-        left: 0;
-        top:0;
-        bottom:0;
-        z-index:5;
-        overflow-x: hidden;
-        will-change: transform;
-        -webkit-transform: translateX(-100%);
-        transform: translateX(-100%);
-        -webkit-transition:transform 240ms cubic-bezier(0,0,0.2,1);
-        transition:transform 240ms cubic-bezier(0,0,0.2,1);
+    @include style-sidebar {
+        padding-top:$header-height - 1;
+        visibility: visible;
+        box-shadow: 0 0 20px rgba(34,36,38,.15);
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        z-index:101;
+        -webkit-transition: none;
+        transition: none;
     }
 
-    // sidebar toggle
-    > input[type="checkbox"]:first-child {
-        position:absolute;
-        bottom:100%;
-        right:100%;
-        visibility:hidden;
-
-        // backdrop
-        + label {
-            display:block;
-            width:0;
-            height:100%;
-            position:fixed;
-            top:0;
-            left:0;
-            z-index:4;
-            opacity:0;
-            background:#000;
-            animation: sidebar-backdrop-hide .5s ease;
-            pointer-events:none;
-
-            &:after {
-                display:block;
-                content:'';
-                width:100%;
-                height:100%;
-                position:fixed;
-                top:0;
-                left:0;
-                background:#fff;
-                animation: sidebar-backdrop-init .5s ease;
-                animation-fill-mode: forwards;
-            }
-        }
-
-        &:checked {
-            + label{
-                animation: sidebar-backdrop-show .5s ease;
-                animation-fill-mode: forwards;
-                pointer-events:auto;
-
-                &:after {
-                    width:0;
-                    height:0;
-                    visibility:hidden;
-                }
-            }
-
-            ~ main > aside:first-of-type {
-                -webkit-transform: translateX(0);
-                transform: translateX(0);
-                -webkit-box-shadow: 0 8px 10px -5px rgba(0,0,0,0.2),0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12);
-                box-shadow: 0 8px 10px -5px rgba(0,0,0,0.2),0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12);
-            }
-        }
-
-        @keyframes sidebar-backdrop-hide {
-          0% { width:100%; opacity:.5; }
-          99% { width:100%; opacity:.0; }
-          100% { width:0; opacity:0; }
-        }
-
-        @keyframes sidebar-backdrop-show {
-          0% { width:100%; opacity:0; }
-          100% { width:100%; opacity:.5; }
-        }
-
-        @keyframes sidebar-backdrop-init {
-            0% { width:100%; height:100%; }
-            99% { width:100%; height:100%; }
-            100% { width:0; height:0; }
-        }
+    @include style-main {
+        width:calc(100% - #{$sidebar-width});
+        transform: translate3d($sidebar-width, 0, 0);
+        -webkit-transition: none;
+        transition: none;
     }
 
-    @include style-tablet {
-        padding-top:$header-height-desktop;
-
-        > header {
-            height:$header-height-desktop;
-
-            > label:first-child {
-                width:$header-height-desktop;
-                padding:floor(($header-height-desktop - ($grid * 2)) / 2) 0;
-            }
-
-            > nav {
-                height:$header-height-desktop;
-
-                > .-logo {
-                    padding:0 $grid;
-                    line-height:$header-height-desktop - 3;
-                }
-
-                > ul {
-                    .fa, .icon {
-                        width:($grid * 2);
-                        height:($grid * 2);
-                        line-height:($grid * 2);
-                        font-size:floor(($grid * 2) - ($grid / 3));
-                    }
-
-                    > li {
-                        > a {
-                            line-height:$header-height-desktop - 3;
-                            padding:0 $grid;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @include style-desktop {
-
-
-        > header {
-            > label:first-child {
-                display:none;
-            }
-        }
-
-        > main {
-            min-height:100%;
-            @include flex(flex, row, stretch);
-
-            > article {
-                flex:1;
-            }
-
-            > aside {
-                width: $sidebar-width-desktop;
-                max-width: 100%;
-                min-width:0;
-                position:relative;
-                z-index:2;
-                -webkit-transform: none;
-                transform: none;
-                -webkit-transition:none 0 ease;
-                transition:none 0 ease;
-                order:-1;
-
-                > nav {
-                    width:100%;
-                    position:absolute;
-                    top:0;
-                    left:0;
-                }
-            }
-        }
+    .pushable>.pusher.dimmed:after {
+        display:none;
     }
 }

@@ -6,46 +6,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Semantic UI -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css">
 
     <!-- Font Awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <!--link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"-->
 
     <!-- Custom Theme Style -->
     <link href="../css/admin.min.css" rel="stylesheet">
 </head>
 <body>
-    <input type="checkbox" id="admin-sidebar-toggle">
-    <label for="admin-sidebar-toggle"></label>
 
-    <header>
-        <label for="admin-sidebar-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-            </svg>
-        </label>
-        <nav riot-tag="r-header"></nav>
+    <header class="ui fixed menu">
+        <a class="item icon sidebar-toggle">
+            <i class="content icon"></i>
+        </a>
+
+        <a class="item" href="./">
+            <i class="cogs icon"></i> <b>管理画面</b>
+        </a>
+
+        <div class="right menu">
+            <div class="item icon ui dropdown">
+                <i class="user icon"></i>
+                <div class="menu">
+                    <div class="header">
+                        ○○さん
+                    </div>
+                    <a class="item" href="#"><i class="sign out icon"></i>ログアウト</a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <article>
-            <section riot-tag="r-index"></section>
-            <footer riot-tag="r-footer"></footer>
-        </article>
+    <aside id="sidebar" class="ui left vertical sidebar menu accordion inverted">
+        <a class="item" href="/examples/">
+            <b>HOME</b>
+        </a>
+        <a class="item" href="/examples/page1">
+            <b>Page1</b>
+        </a>
+        <a class="item" href="/examples/page2">
+          <b>Page2</b>
+        </a>
 
-        <aside>
-            <nav riot-tag="r-sidebar"></nav>
-        </aside>
+        <div class="item">
+            <div class="title"><i class="dropdown icon"></i> What is a dog? </div>
+            <div class="content">
+                <a class="item" href="/examples/page1">
+                    <b>Page1</b>
+                </a>
+                <a class="item" href="/examples/page2">
+                  <b>Page2</b>
+                </a>
+
+                <div class="item">
+                    <div class="title"><i class="dropdown icon"></i> What is a dog? </div>
+                    <div class="content">
+                        <a class="item" href="/examples/page1">
+                            <b>Page1</b>
+                        </a>
+                        <a class="item" href="/examples/page2">
+                          <b>Page2</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <main class="pusher">
+        <article riot-tag="page"></article>
     </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.4.1/riot+compiler.min.js"></script>
-<script src="r-header.tag" type="riot/tag"></script>
-<script src="r-footer.tag" type="riot/tag"></script>
-<script src="r-sidebar.tag" type="riot/tag"></script>
-<script src="r-index.tag" type="riot/tag"></script>
-<script>
-riot.mount('*');
-</script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
+<script src="../js/admin.js"></script>
 </body>
 </html>
